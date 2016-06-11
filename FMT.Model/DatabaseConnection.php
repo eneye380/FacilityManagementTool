@@ -14,10 +14,15 @@
 class DatabaseConnection {
 
     //put your code here
-    private $hostname = "localhost";
-    private $username = "root";
-    private $password = "";
-    private $database = "facilityMdb";
+    //private $hostname = "localhost";
+    //private $username = "root";
+    //private $password = "";
+    //private $database = "facilityMdb";
+    
+    private $hostname = "us-cdbr-azure-central-a.cloudapp.net";
+    private $username = "bab6f319dbd8e0";
+    private $password = "77132848";
+    private $database = "aeadb";
 
     function __construct() {
         

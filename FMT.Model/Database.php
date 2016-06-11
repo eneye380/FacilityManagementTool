@@ -101,10 +101,15 @@ class Database {
 
 }
 
-$localhost = "localhost";
-$username = "root";
-$password = "";
-$db = "facilityMdb";
+//$localhost = "localhost";
+//$username = "root";
+//$password = "";
+//$db = "facilityMdb";
+
+ $localhost = "us-cdbr-azure-central-a.cloudapp.net";
+     $username = "bab6f319dbd8e0";
+     $password = "77132848";
+     $db = "aeadb";
 //$db1 = "facilityMdb";
 //$sql1 = "CREATE DATABASE " . $db1 . "";
 /***$sql = "CREATE TABLE Reviews (
@@ -198,9 +203,13 @@ $objd = new Database($localhost, $username, $password, $db);
 $objd->createConnection();
 //$objd->createDatabase($sql1);
 //$objd->createTable($drop);
-//$objd->createTable($customer);
-//$objd->createTable($lease);
+
+$objd->createTable($facilitator);
+$objd->createTable($building);
+$objd->createTable($customer);
+$objd->createTable($lease);
 $objd->createTable($complaint);
-//$objd->createTable($asset);
+$objd->createTable($views);
+$objd->createTable($asset);
 //echo eneye;
 
