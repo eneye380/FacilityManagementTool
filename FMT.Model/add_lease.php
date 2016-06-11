@@ -1,11 +1,12 @@
 
 <?php
+session_start();
 include './mysqli_connection.php';
-include './Facilitator.php';
+include './Lease.php';
 
-use Facilitator;
+use Lease;
 
-$facilitator = new Facilitator();
+$lease = new Lease();
 ?>
 <!DOCTYPE html>
 <!--
@@ -27,18 +28,29 @@ and open the template in the editor.
             $errors = array(); // Initialize an error array.
             // Check for a agency name:
 
-            if (empty($_POST['fname'])) {
-                $errors[] = 'You forgot to enter your agency name.';
+            if (empty($_POST['cid'])) {
+                $errors[] = 'You forgot to enter your customer id.';
             } else {
-                $n = mysqli_real_escape_string($conn, trim($_POST['fname']));
+                $c = mysqli_real_escape_string($conn, trim($_POST['cid']));
             }
             // Check for a agency email
-            if (empty($_POST['femail'])) {
-                $errors[] = 'You forgot to enter your agency email.';
+            if (empty($_POST['bid'])) {
+                $errors[] = 'You forgot to enter your building id.';
             } else {
-                $e = mysqli_real_escape_string($conn, trim($_POST['femail']));
+                $b = mysqli_real_escape_string($conn, trim($_POST['bid']));
             }
-            // Check for a password and match it against the confirmed password
+            if (empty($_POST['lstart'])) {
+                $errors[] = 'You forgot to enter your lease start date.';
+            } else {
+                $s = mysqli_real_escape_string($conn, trim($_POST['lstart']));
+            }
+            if (empty($_POST['lend'])) {
+                $errors[] = 'You forgot to enter your lease end date.';
+            } else {
+                $e = mysqli_real_escape_string($conn, trim($_POST['lend']));
+                
+            }
+            /**Check for a password and match it against the confirmed password
             if (!empty($_POST['fpassword1'])) {
                 if ($_POST['fpassword1'] != $_POST['fpassword2']) {
                     $errors[] = 'Your two passwords did not match.';
@@ -47,14 +59,19 @@ and open the template in the editor.
                 }
             } else {
                 $errors[] = 'You forgot to enter your password.';
-            }
+            }*/
             if (empty($errors)) { // If it runs
-                $facilitator->createConnectionToDb();
-                $facilitator->setFac_email($e);
-                $facilitator->generateFac_id();
-                $id = $facilitator->getFac_id();
-                $facilitator->upload($id, $n, $e, $p);
-
+                
+                $facid = $_SESSION['facid'];
+                $lease->createConnectionToDb();
+                $lease->setCus_id($c);
+                $lease->setBui_id($b);
+                $lease->generateLse_id();
+                
+                $id = $lease->getLse_id();
+                
+                $lease->upload($id, $b, $c, $s, $e, $facid);
+                
                 $conn->close();
             } else { // Report the errors.
                 echo '<h2>Error!</h2>

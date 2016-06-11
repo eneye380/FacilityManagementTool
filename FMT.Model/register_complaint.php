@@ -1,11 +1,12 @@
 
 <?php
+session_start();
 include './mysqli_connection.php';
-include './Facilitator.php';
+include './Complaint.php';
 
-use Facilitator;
+use Complaint;
 
-$facilitator = new Facilitator();
+$complaint = new Complaint();
 ?>
 <!DOCTYPE html>
 <!--
@@ -27,18 +28,29 @@ and open the template in the editor.
             $errors = array(); // Initialize an error array.
             // Check for a agency name:
 
-            if (empty($_POST['fname'])) {
-                $errors[] = 'You forgot to enter your agency name.';
+            if (empty($_POST['bid'])) {
+                $errors[] = 'You forgot to enter your customer name.';
             } else {
-                $n = mysqli_real_escape_string($conn, trim($_POST['fname']));
+                $b = mysqli_real_escape_string($conn, trim($_POST['bid']));
             }
             // Check for a agency email
-            if (empty($_POST['femail'])) {
-                $errors[] = 'You forgot to enter your agency email.';
+            if (empty($_POST['ccat'])) {
+                $errors[] = 'You forgot to enter your customer type.';
             } else {
-                $e = mysqli_real_escape_string($conn, trim($_POST['femail']));
+                $c = mysqli_real_escape_string($conn, trim($_POST['ccat']));
             }
-            // Check for a password and match it against the confirmed password
+            if (empty($_POST['cmessage'])) {
+                $errors[] = 'You forgot to enter your customer email address.';
+            } else {
+                $m = mysqli_real_escape_string($conn, trim($_POST['cmessage']));
+            }
+            /**if (empty($_POST['cdetail'])) {
+                $errors[] = 'You forgot to enter your customer detail.';
+            } else {
+                $d = mysqli_real_escape_string($conn, trim($_POST['cdetail']));
+                
+            }
+            /**Check for a password and match it against the confirmed password
             if (!empty($_POST['fpassword1'])) {
                 if ($_POST['fpassword1'] != $_POST['fpassword2']) {
                     $errors[] = 'Your two passwords did not match.';
@@ -47,13 +59,17 @@ and open the template in the editor.
                 }
             } else {
                 $errors[] = 'You forgot to enter your password.';
-            }
+            }*/
             if (empty($errors)) { // If it runs
-                $facilitator->createConnectionToDb();
-                $facilitator->setFac_email($e);
-                $facilitator->generateFac_id();
-                $id = $facilitator->getFac_id();
-                $facilitator->upload($id, $n, $e, $p);
+                
+                $facid = $_SESSION['facid'];
+                $cusid = $_SESSION['cusid'];
+                $complaint->createConnectionToDb();
+                $complaint->generateCom_id();
+                $id = $complaint->getCom_id();
+                $s = "unresolved";
+                //echo 'meem';
+                $complaint->upload($id, $cusid, $c, $m, $s, $facid, $b);
 
                 $conn->close();
             } else { // Report the errors.

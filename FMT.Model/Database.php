@@ -142,7 +142,9 @@ $customer = "CREATE TABLE Customer (
 	cus_type VARCHAR(30),
         cus_detail TEXT,
 	registration_date DATETIME,
-	PRIMARY KEY(cus_id)
+        fac_id VARCHAR(10),
+	PRIMARY KEY(cus_id),
+        FOREIGN KEY(fac_id) REFERENCES Facilitator(fac_id)
 )";
 $lease = "CREATE TABLE Lease (
 	lse_id VARCHAR(10),
@@ -150,19 +152,25 @@ $lease = "CREATE TABLE Lease (
 	cus_id VARCHAR(10),
         lease_start DATE,
         lease_end DATE,
+        fac_id VARCHAR(10),
 	PRIMARY KEY(lse_id,bui_id,cus_id),
 	FOREIGN KEY(bui_id) REFERENCES Building(bui_id),
-	FOREIGN KEY(cus_id) REFERENCES Customer(cus_id)
+	FOREIGN KEY(cus_id) REFERENCES Customer(cus_id),
+        FOREIGN KEY(fac_id) REFERENCES Facilitator(fac_id)
 )";
 $complaint = "CREATE TABLE Complaint (
 	com_id VARCHAR(10),
 	cus_id VARCHAR(10),
 	com_category VARCHAR(30),
         com_message TEXT,
-	comp_date DATETIME,
+	com_date DATETIME,
         com_status VARCHAR(15),
+        fac_id VARCHAR(10),
+        bui_id VARCHAR(10),
 	PRIMARY KEY(com_id,cus_id),
-	FOREIGN KEY(cus_id) REFERENCES Customer(cus_id)
+	FOREIGN KEY(cus_id) REFERENCES Customer(cus_id),
+        FOREIGN KEY(fac_id) REFERENCES Facilitator(fac_id),
+        FOREIGN KEY(bui_id) REFERENCES Building(bui_id)
 )";
 $views = "CREATE TABLE Views (
 	vie_id VARCHAR(10),
@@ -179,14 +187,20 @@ $asset = "CREATE TABLE Asset (
 	ass_id VARCHAR(10),
 	bui_id VARCHAR(10),
 	asset VARCHAR(100),
+        fac_id VARCHAR(10),
 	PRIMARY KEY(ass_id,bui_id),
-	FOREIGN KEY(bui_id) REFERENCES Building(bui_id)
+	FOREIGN KEY(bui_id) REFERENCES Building(bui_id),
+        FOREIGN KEY(fac_id) REFERENCES Facilitator(fac_id)
 )";
-$drop = "DROP TABLE Asset";
+$drop = "DROP TABLE Complaint";
 $objd = new Database($localhost, $username, $password, $db);
 //echo $objd->getLocahost();
 $objd->createConnection();
 //$objd->createDatabase($sql1);
-$objd->createTable($asset);
+//$objd->createTable($drop);
+//$objd->createTable($customer);
+//$objd->createTable($lease);
+$objd->createTable($complaint);
+//$objd->createTable($asset);
 //echo eneye;
 

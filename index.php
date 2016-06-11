@@ -4,10 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<?php
-session_start();
-$_SESSION['from_page'] = "1";
-?>
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -16,19 +13,19 @@ $_SESSION['from_page'] = "1";
         <meta name="description" content="">
         <meta name="author" content="Abdulmumin">
         <title>Home Page - Facility Management</title>
-        <?php require("./FMT.View/FMT.View.Header/lib.php"); ?>
+<?php require("./FMT.View/FMT.View.Header/lib.php"); ?>
         <script type=text/javascript src="FMT.Model/Print.js"></script>
         <script type=text/javascript src="FMT.Controller/validation.js"></script>
         <script type=text/javascript src="FMT.Controller/facility.js"></script>
         <script type=text/javascript src="FMT.Controller/login.js"></script>
-        
+
     </head>
     <body id = "page-top" class="index">
-        <?php include("./FMT.View/FMT.View.Header/header_nav.php"); ?>
-        <?php include("./FMT.View/FMT.View.Header/header_2.php"); ?>
-        <?php
-        // put your code here
-        ?>
+<?php include("./FMT.View/FMT.View.Header/header_nav.php"); ?>
+<?php include("./FMT.View/FMT.View.Header/header_2.php"); ?>
+<?php
+// put your code here
+?>
 
 
         <!-- Contact Section -->
@@ -50,9 +47,11 @@ $_SESSION['from_page'] = "1";
                                 <div class="form-group col-xs-12 floating-label-form-group controls">
                                     <div><label>Agency Name</label></div>
                                     <input type="text" class="form-control" placeholder="Agency Name" name="fname" id="name" 
-                                           value="<?php if (isset($_POST['fname'])) {
-            echo $_POST['fname'];
-        } ?>" required data-validation-required-message="Please enter your name.">
+                                           value="<?php
+if (isset($_POST['fname'])) {
+    echo $_POST['fname'];
+}
+?>" required data-validation-required-message="Please enter your name.">
                                     <p class="help-block text-danger" id="namehint"></p>
                                 </div>
                             </div>
@@ -60,9 +59,11 @@ $_SESSION['from_page'] = "1";
                                 <div class="form-group col-xs-12 floating-label-form-group controls">
                                     <label>Email Address</label>
                                     <input type="email" class="form-control" placeholder="Email Address" name="femail" id="email" 
-                                           value="<?php if (isset($_POST['femail'])) {
-            echo $_POST['femail'];
-        } ?>" required data-validation-required-message="Please enter your email address.">
+                                           value="<?php
+if (isset($_POST['femail'])) {
+    echo $_POST['femail'];
+}
+?>" required data-validation-required-message="Please enter your email address.">
                                     <p class="help-block text-danger" id="emailhint"></p>
                                 </div>
                             </div>
@@ -70,9 +71,11 @@ $_SESSION['from_page'] = "1";
                                 <div class="form-group col-xs-12 floating-label-form-group controls">
                                     <label>Password</label>
                                     <input type="password" class="form-control" placeholder="Password" id="password1" name="fpassword1"
-                                           value="<?php if (isset($_POST['fpassword1'])) {
-            echo $_POST['fpassword1'];
-        } ?>" required data-validation-required-message="Please enter your phone number.">
+                                           value="<?php
+if (isset($_POST['fpassword1'])) {
+    echo $_POST['fpassword1'];
+}
+?>" required data-validation-required-message="Please enter your phone number.">
                                     <p class="help-block text-danger" id="passwordhint"></p>
                                 </div>
                             </div>
@@ -80,9 +83,11 @@ $_SESSION['from_page'] = "1";
                                 <div class="form-group col-xs-12 floating-label-form-group controls">
                                     <label>Password</label>
                                     <input type="password" class="form-control" placeholder="Password" id="password2" name="fpassword2"
-                                           value="<?php if (isset($_POST['fpassword2'])) {
-            echo $_POST['fpassword2'];
-        } ?>" required data-validation-required-message="Please enter your phone number.">
+                                           value="<?php
+                                           if (isset($_POST['fpassword2'])) {
+                                               echo $_POST['fpassword2'];
+                                           }
+                                           ?>" required data-validation-required-message="Please enter your phone number.">
                                     <p class="help-block text-danger"></p>
                                     <p class="help-block text-danger"></p>
                                 </div>
@@ -109,27 +114,33 @@ $_SESSION['from_page'] = "1";
                         <hr class="star-primary">
                     </div>
                 </div>
+                
+                <p class="error text-center" id="hint" style="color:red"></p>
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
                         <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
                         <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
-                        <form class="form-horizontal" role='form' style='padding: 100px' role="form" method="post" action="FMT.View/login.php">
+                        <form class="form-horizontal" role='form' style='padding: 100px' method="post" action="index.php#login" onsubmit="return entry(this)">
                             <div class="row control-group">
                                 <div class="form-group col-xs-12 floating-label-form-group controls">
                                     <label>Email Address</label>
                                     <input type="email" class="form-control" placeholder="Email Address" name="username" id="email" 
-                                           value="<?php if (isset($_POST['fusername'])) {
-            echo $_POST['fusername'];
-        } ?>" required data-validation-required-message="Please enter your email address.">
+                                           value="<?php
+                if (isset($_POST['username'])) {
+                    echo $_POST['username'];
+                }
+                ?>" required data-validation-required-message="Please enter your email address.">
                                 </div>
                             </div>
                             <div class="row control-group">
                                 <div class="form-group col-xs-12 floating-label-form-group controls">
                                     <label>Password</label>
                                     <input type="password" class="form-control" placeholder="Password" id="password" name="password"
-                                           value="<?php if (isset($_POST['fpassword'])) {
-            echo $_POST['fpassword'];
-        } ?>" required data-validation-required-message="Please enter your phone number.">
+                                           value="<?php
+                if (isset($_POST['password'])) {
+                    echo $_POST['password'];
+                }
+                ?>" required data-validation-required-message="Please enter your phone number.">
                                 </div>
                             </div>
                             <br>

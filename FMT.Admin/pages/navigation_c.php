@@ -2,13 +2,17 @@
 session_start();
 
 
-if(!isset($_SESSION['facid']) || !isset($_SESSION['login'])){
+if(!isset($_SESSION['cusid'])){
     //$_SESSION['from_page']='2';
-    $url = "../../index.php#login";
+    $url = "../pages/clogin.php";
      header('Location: ' . $url);
 }
 $fid = $_SESSION['facid'];
-$na = $_SESSION['facname'];
+$fna = $_SESSION['facname'];
+$fem = $_SESSION['facemail'];
+$cid = $_SESSION['cusid'];
+$cna = $_SESSION['cusname'];
+$cem = $_SESSION['cusemail'];
 ?>
 
 <!--
@@ -25,7 +29,7 @@ and open the template in the editor.
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="adminfm.php"> <span class="text-capitalize" style="color: #c12e2a"><?php echo ''.$na;?></span> Admin Console</a>
+                <a class="navbar-brand" href="customerfm.php"> <span class="text-capitalize" style="color: #c12e2a"><?php echo ''.$cna;?></span> Customer Console</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -225,12 +229,12 @@ and open the template in the editor.
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> <?php echo ''.$fid;?></a>
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i> <?php echo ''.$cid;?></a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> <?php echo ''.$na;?></a>
+                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> <?php echo ''.$cem;?></a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="../../FMT.View/logout.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="../pages/clogout.php"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -254,37 +258,34 @@ and open the template in the editor.
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="adminfm.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="customerfm.php"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-building-o fa-fw"></i> Building<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="add_building.php">Add New Building</a>
+                                    <a href="#">My Buildings</a>
                                 </li>
-                                <li>
+                                <!--li>
                                     <a href="manage_building.php">Manage Building</a>
-                                </li>
+                                </li-->
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                        
                         <li>
-                            <a href="#"><i class="fa fa-picture-o fa-fw"></i> Customer<span class="fa arrow"></span></a>
+                            <a href="customerfm.php#lease"><i class="fa fa-legal fa-fw"></i> Lease</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-edit fa-fw"></i> Complaint</a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="add_customer.php">Add new Customer</a>
+                                    <a href="complaint.php">My Complaint</a>
                                 </li>
                                 <li>
-                                    <a href="manage_customer.php">Manage Customer</a>
+                                    <a href="customerfm.php#complaint">Make Complaint</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
-                        </li>
-                        <li>
-                            <a href="lease.php"><i class="fa fa-legal fa-fw"></i> Lease</a>
-                        </li>
-                        <li>
-                            <a href="complaint_aview.php"><i class="fa fa-edit fa-fw"></i> Complaint</a>
                         </li>
                         
                         <!--li>

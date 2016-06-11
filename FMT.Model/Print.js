@@ -5,13 +5,14 @@
  */
 //alert('status');
 var egg = 'abdulmumin';
-function Myname(name){
+var Myname = function(name){
     this.name = name;
     this.print = print;
-}
+};
 function print(){
     return this.name;
 }
 var a = new Myname(egg);
+//alert(a.print());
 console.log(a.print());
 

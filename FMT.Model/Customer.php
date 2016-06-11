@@ -16,14 +16,16 @@ use DatabaseConnection;
  *
  * @author eneye380
  */
-class Facilitator {
+class Customer {
 
     //put your code here
-    private $fac_id;
-    private $fac_name;
-    private $fac_email;
-    private $fac_password;
+    private $cus_id;
+    private $cus_name;
+    private $cus_email;
+    private $cus_type;
+    private $cus_detail;
     private $registration_date;
+    private $fac_id;
     private $connection_to_db;
     private static $idnum = 10000;
 
@@ -31,23 +33,23 @@ class Facilitator {
         
     }
 
-    function upload($id, $email, $name, $password) {
-
-        $sql = "SELECT * FROM Facilitator WHERE fac_email='$this->fac_email'";
+    function upload($id, $name, $email, $type, $detail,$fid) {
+        
+        $sql = "SELECT * FROM Customer WHERE cus_email='$this->cus_email'";
         $result = $this->connection_to_db->query($sql);
 
         if ($result->num_rows > 0) {
 
             echo '<br><h3>Email Exist, please register using a different email</h3>';
-            echo "<br> <a href='../index.php#register'>Click to go back</a>";
+            echo "<br> <a href='../FMT.Admin/pages/add_customer.php'>Click to go back</a>";
         } else {
             $date = date("Y-m-d h:i:s");
-            $sql = "INSERT INTO Facilitator (fac_id,fac_email,fac_name,fac_password,registration_date) 
-		VALUES ('$id','$name','$email',SHA1('$password'),'$date')";
+            $sql = "INSERT INTO Customer (cus_id,cus_name,cus_email,cus_type,cus_detail,registration_date,fac_id) 
+		VALUES ('$id','$name','$email','$type','$detail','$date','$fid')";
 
             if ($this->connection_to_db->query($sql) === TRUE) {
                 echo "<br>registered succesfully";
-                echo "<br> <a href='../index.php#login'>Login here</a>";
+                echo "<br> <a href='../FMT.Admin/pages/add_customer.php'>Go Back</a>";
             } else {
                 echo "<br>Error: " . $sql . "<br>" . $this->connection_to_db->error;
             }
@@ -63,22 +65,23 @@ class Facilitator {
         $this->connection_to_db = $conn->getConnectionToDB();
     }
 
-    function generateFac_id() {
+    function generateCus_id() {
+        
         $digit = null;
         if (!$this->doesEmailExist()) {
-            $fac_ids = $this->retrieveFac_ids();
-            if (!is_bool($fac_ids)) {
-                $digit = $this->extractNum($fac_ids);
+            $cus_ids = $this->retrieveCus_ids();
+            if (!is_bool($cus_ids)) {
+                $digit = $this->extractNum($cus_ids);
                 $max = max($digit);
                 //print_r($digit);
                 $max++;
-                $id = "F" . $max;
-                $this->setFac_id($id);
+                $id = "C" . $max;
+                $this->setCus_id($id);
                 //echo '<br>FID: ' . $this->getFac_id();
             } else {
-                Facilitator::$idnum++;
-                $id = "F" . Facilitator::$idnum;
-                $this->setFac_id($id);
+                Customer::$idnum++;
+                $id = "C" . Customer::$idnum;
+                $this->setCus_id($id);
                 //echo '<br>first FID: ' . $this->getFac_id();
             }
         } else {
@@ -87,11 +90,11 @@ class Facilitator {
     }
 
     function doesEmailExist() {
-        if ($this->fac_email != "") {
+        if ($this->cus_email != "") {
             if ($this->connection_to_db->connect_error) {
                 die("Connection failed: " . $this->connection_to_db->connect_error);
             }
-            $sql = "SELECT * FROM Facilitator WHERE fac_email='$this->fac_email'";
+            $sql = "SELECT * FROM Customer WHERE cus_email='$this->cus_email'";
             $result = $this->connection_to_db->query($sql);
 
             if ($result->num_rows == 0) {
@@ -106,11 +109,11 @@ class Facilitator {
         }
     }
 
-    function retrieveFac_ids() {
+    function retrieveCus_ids() {
         if ($this->connection_to_db->connect_error) {
             die("Connection failed: " . $this->connection_to_db->connect_error);
         }
-        $sql = "SELECT fac_id FROM Facilitator";
+        $sql = "SELECT cus_id FROM Customer";
         $result = $this->connection_to_db->query($sql);
         $arr = [];
         //$arr[] = "F1000";
@@ -118,7 +121,7 @@ class Facilitator {
         if ($result->num_rows > 0) {
             // output data of each row
             while ($row = $result->fetch_assoc()) {
-                $arr[] = $row["fac_id"];
+                $arr[] = $row["cus_id"];
             }
             return $arr;
         } else {
@@ -131,27 +134,32 @@ class Facilitator {
     function extractNum(Array $arr) {
         $num = [];
         foreach ($arr as $value) {
-            $num[] = (int) (explode("F", $value)[1]);
+            $num[] = (int) (explode("C", $value)[1]);
         }
         return $num;
     }
 
+    function setCus_id($id) {
+        $this->cus_id = $id;
+    }
+
+    function setCus_name($na) {
+        $this->cus_name = $na;
+    }
+
+    function setCus_email($em) {
+        $this->cus_email = $em;
+    }
+
+    function setCus_type($ty) {
+        $this->cus_type = $ty;
+    }
+      function setCus_detail($de) {
+        $this->cus_detail = $de;
+    }
     function setFac_id($id) {
         $this->fac_id = $id;
     }
-
-    function setFac_name($na) {
-        $this->fac_name = $na;
-    }
-
-    function setFac_email($em) {
-        $this->fac_email = $em;
-    }
-
-    function setFac_password($ps) {
-        $this->fac_password = $ps;
-    }
-
     function setRegistration_date($rd) {
         $this->registration_date = $rd;
     }
@@ -160,20 +168,26 @@ class Facilitator {
         $this->connection_to_db = $co;
     }
 
+    function getCus_id() {
+        return $this->cus_id;
+    }
+
+    function getCus_name() {
+        return $this->cus_name;
+    }
+
+    function getCus_email() {
+        return $this->cus_email;
+    }
+
+    function getCus_type() {
+        return $this->cus_type;
+    }
+    function getCus_detail() {
+        return $this->cus_detail;
+    }
     function getFac_id() {
         return $this->fac_id;
-    }
-
-    function getFac_name() {
-        return $this->fac_name;
-    }
-
-    function getFac_email() {
-        return $this->fac_email;
-    }
-
-    function getFac_password() {
-        return $this->fac_password;
     }
 
     function getRegistration_date() {

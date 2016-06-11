@@ -3,6 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+//alert('hh');
 function entry(form) {
     //alert("p4");
     err={};
@@ -11,8 +12,8 @@ function entry(form) {
         err[i].innerHTML = "";
     }
     var error="";
-    if (form.username.value === "") {
-        error = "you forgot to enter your username<br>";
+    if (form.email.value === "") {
+        error = "you forgot to enter your email<br>";
         //document.getElementById("hint").innerHTML = "please enter username";
         //return false;
     }if (form.password.value === "") {
@@ -24,8 +25,8 @@ function entry(form) {
         document.getElementById("hint").innerHTML = error;
         return false;
     }
-    var url = '/FMT.View/login.php';
-        var params = "password=" + form.password.value + "&username=" + form.username.value;
+    var url = '/FMT.Admin/pages/cloginc.php';
+        var params = "password=" + form.password.value + "&username=" + form.email.value;
         //alert(form.fpassword.value);
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function () {
@@ -36,10 +37,10 @@ function entry(form) {
                 console.log('X: '+ x);
                 console.log(x === 'ok');
                 if (x === 'ok') {
-                    location.href = '/FMT.Admin/pages/adminfm.php';
+                    location.href = '/FMT.Admin/pages/customerfm.php';
                     //location.href = '/FMT.View/buildingform.php';
                 } else if (x === 'notok') {
-                    document.getElementById("hint").innerHTML = 'email or password incorrect, please try again or register';
+                    document.getElementById("hint").innerHTML = 'email or password incorrect,<br> please get password from your facilitator';
                 } else {
                     document.getElementById("hint").innerHTML = x;
                 }

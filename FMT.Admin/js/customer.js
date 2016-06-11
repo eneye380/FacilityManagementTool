@@ -7,6 +7,8 @@
 
 
 
+
+
 function click_submit(form){
     
     //alert(form.btype.value);

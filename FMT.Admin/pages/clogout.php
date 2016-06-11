@@ -13,10 +13,10 @@ and open the template in the editor.
         <?php
         session_start();
         session_destroy();
-        //include '../index.php#login';
+        include '../pages/clogin.php';
         //session_start();
         //$_SESSION['from_page'] = '2';
-        $url = "../index.php#login";
+        $url = "../pages/clogin.php";
         die(header('Location: ' . $url));
         ?>
         // put your code here
