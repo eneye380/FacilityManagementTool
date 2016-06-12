@@ -209,7 +209,7 @@ $objd->createConnection();
 //$objd->createTable($customer);
 //$objd->createTable($lease);
 //$objd->createTable($complaint);
-$objd->createTable($views);
-//$objd->createTable($asset);
+//$objd->createTable($views);
+$objd->createTable($asset);
 //echo eneye;
 
