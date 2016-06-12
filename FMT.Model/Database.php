@@ -206,8 +206,8 @@ $objd->createConnection();
 
 //$objd->createTable($facilitator);
 //$objd->createTable($building);
-$objd->createTable($customer);
-//$objd->createTable($lease);
+//$objd->createTable($customer);
+$objd->createTable($lease);
 //$objd->createTable($complaint);
 //$objd->createTable($views);
 //$objd->createTable($asset);
