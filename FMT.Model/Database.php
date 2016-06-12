@@ -204,12 +204,12 @@ $objd->createConnection();
 //$objd->createDatabase($sql1);
 //$objd->createTable($drop);
 
-$objd->createTable($facilitator);
+//$objd->createTable($facilitator);
 $objd->createTable($building);
-$objd->createTable($customer);
-$objd->createTable($lease);
-$objd->createTable($complaint);
-$objd->createTable($views);
-$objd->createTable($asset);
+//$objd->createTable($customer);
+//$objd->createTable($lease);
+//$objd->createTable($complaint);
+//$objd->createTable($views);
+//$objd->createTable($asset);
 //echo eneye;
 
