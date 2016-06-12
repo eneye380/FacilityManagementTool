@@ -189,7 +189,7 @@ if (isset($_POST['fpassword1'])) {
                         </div>
                         <div class="footer-col col-md-4">
                             <h3>Around the Web</h3>
-                            <ul class="list-inline">
+                            <!--ul class="list-inline">
                                 <li>
                                     <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-facebook"></i></a>
                                 </li>
@@ -205,7 +205,7 @@ if (isset($_POST['fpassword1'])) {
                                 <li>
                                     <a href="#" class="btn-social btn-outline"><i class="fa fa-fw fa-dribbble"></i></a>
                                 </li>
-                            </ul>
+                            </ul-->
                         </div>
                         <div class="footer-col col-md-4">
                             <h3>About Facility M</h3>
