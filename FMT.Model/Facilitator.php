@@ -59,11 +59,11 @@ class Facilitator {
     }
 
     function createConnectionToDb() {
-    	echo " 8 \n";
+    	
         $conn = new DatabaseConnection();
-        echo " 9 \n";
+        
         $this->connection_to_db = $conn->getConnectionToDB();
-        echo " 10 \n";
+        
     }
 
     function generateFac_id() {
