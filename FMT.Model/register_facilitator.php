@@ -24,7 +24,7 @@ and open the template in the editor.
         // This query INSERTs a record in the users table.
 // Has the form been submitted?
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            echo "\nhello\n";
+            
             $errors = array(); // Initialize an error array.
             // Check for a agency name:
 
@@ -32,7 +32,7 @@ and open the template in the editor.
                 $errors[] = 'You forgot to enter your agency name.';
             } else {
                 $n = mysqli_real_escape_string($conn, trim($_POST['fname']));
-                echo $n."\n";
+                
                 
             }
             // Check for a agency email
@@ -40,7 +40,7 @@ and open the template in the editor.
                 $errors[] = 'You forgot to enter your agency email.';
             } else {
                 $e = mysqli_real_escape_string($conn, trim($_POST['femail']));
-                echo $e."\n";
+                
             }
             // Check for a password and match it against the confirmed password
             if (!empty($_POST['fpassword1'])) {
@@ -48,27 +48,27 @@ and open the template in the editor.
                     $errors[] = 'Your two passwords did not match.';
                 } else {
                     $p = mysqli_real_escape_string($conn, trim($_POST['fpassword1']));
-                    echo $p."\n";
+                    
                 }
             } else {
                 $errors[] = 'You forgot to enter your password.';
             }
             if (empty($errors)) { // If it runs
-                echo " 1 \n";
+                
                 $conn->close();
                 $facilitator->createConnectionToDb();
-                echo " 2 \n";
+                
                 $facilitator->setFac_email($e);
-                echo " 3 \n";
+                
                 $facilitator->generateFac_id();
-                echo " 4 \n";
+                
                 $id = $facilitator->getFac_id();
-                echo " 5 \n";
+                
                 $facilitator->upload($id, $n, $e, $p);
-                echo " 6 \n";
-                echo "id:".$id."\n";
+                
+                
                 $conn->close();
-                echo " 7 \n";
+                
             } else { // Report the errors.
                 echo '<h2>Error!</h2>
  <p class="error">The following error(s) occurred:<br>';
