@@ -72,7 +72,7 @@ class DatabaseConnection {
 
     function getConnectionToDB() {
         echo " 11 \n";
-        $conn = new mysqli($this->localhost, $this->username, $this->password, $this->database);
+        $conn = new mysqli("us-cdbr-azure-central-a.cloudapp.net", "bab6f319dbd8e0", "77132848", "aeadb");
         echo " 12 \n";
         if ($conn->connect_error) {
             echo " 13 \n";
