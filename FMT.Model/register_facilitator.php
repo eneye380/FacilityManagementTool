@@ -55,6 +55,7 @@ and open the template in the editor.
             }
             if (empty($errors)) { // If it runs
                 echo " 1 \n";
+                $conn->close();
                 $facilitator->createConnectionToDb();
                 echo " 2 \n";
                 $facilitator->setFac_email($e);
