@@ -71,18 +71,18 @@ class DatabaseConnection {
     }
 
     function getConnectionToDB() {
-        echo " 11 \n";
-        $conn = new mysqli("us-cdbr-azure-central-a.cloudapp.net", "bab6f319dbd8e0", "77132848", "aeadb");
-        echo " 12 \n";
+        
+        $conn = new mysqli($this->hostname, $this->username, $this->password, $this->database);
+        
         if ($conn->connect_error) {
-            echo " 13 \n";
+            
             die("Connection failed: " . $conn->connect_error);
-            echo " 14 \n";
+            
         } else {
             //echo '<br>created';
-            echo " 15 \n";
+        
         }
-        echo " 16 \n";
+        
         return $conn;
     }
 
