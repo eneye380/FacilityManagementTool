@@ -44,7 +44,7 @@ class DatabaseConnection {
         $this->database = $db;
     }
 
-    function getLocahost() {
+    function getLocalhost() {
         return $this->hostname;
     }
 
@@ -61,7 +61,7 @@ class DatabaseConnection {
     }
 
     function getConnection() {
-        $conn = new mysqli($this->localhost, $this->username, $this->password);
+        $conn = new mysqli($this->hostname, $this->username, $this->password);
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         } else {
