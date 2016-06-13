@@ -54,13 +54,20 @@ and open the template in the editor.
                 $errors[] = 'You forgot to enter your password.';
             }
             if (empty($errors)) { // If it runs
+                echo " 1 \n";
                 $facilitator->createConnectionToDb();
+                echo " 2 \n";
                 $facilitator->setFac_email($e);
+                echo " 3 \n";
                 $facilitator->generateFac_id();
+                echo " 4 \n";
                 $id = $facilitator->getFac_id();
+                echo " 5 \n";
                 $facilitator->upload($id, $n, $e, $p);
+                echo " 6 \n";
                 echo "id:".$id."\n";
                 $conn->close();
+                echo " 7 \n";
             } else { // Report the errors.
                 echo '<h2>Error!</h2>
  <p class="error">The following error(s) occurred:<br>';
