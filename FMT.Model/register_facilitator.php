@@ -24,7 +24,7 @@ and open the template in the editor.
         // This query INSERTs a record in the users table.
 // Has the form been submitted?
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            echo "hello\n";
+            die ("hello");
             $errors = array(); // Initialize an error array.
             // Check for a agency name:
 
