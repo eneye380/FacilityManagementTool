@@ -71,13 +71,18 @@ class DatabaseConnection {
     }
 
     function getConnectionToDB() {
-
+        echo " 11 \n";
         $conn = new mysqli($this->localhost, $this->username, $this->password, $this->database);
+        echo " 12 \n";
         if ($conn->connect_error) {
+            echo " 13 \n";
             die("Connection failed: " . $conn->connect_error);
+            echo " 14 \n";
         } else {
             //echo '<br>created';
+            echo " 15 \n";
         }
+        echo " 16 \n";
         return $conn;
     }
 
