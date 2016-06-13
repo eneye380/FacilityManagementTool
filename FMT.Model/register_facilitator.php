@@ -30,20 +30,20 @@ and open the template in the editor.
             if (empty($_POST['fname'])) {
                 $errors[] = 'You forgot to enter your agency name.';
             } else {
-                $n = mysqli_real_escape_string($conn, trim($_POST['fname']));
+                //$n = mysqli_real_escape_string($conn, trim($_POST['fname']));
             }
             // Check for a agency email
             if (empty($_POST['femail'])) {
                 $errors[] = 'You forgot to enter your agency email.';
             } else {
-                $e = mysqli_real_escape_string($conn, trim($_POST['femail']));
+                //$e = mysqli_real_escape_string($conn, trim($_POST['femail']));
             }
             // Check for a password and match it against the confirmed password
             if (!empty($_POST['fpassword1'])) {
                 if ($_POST['fpassword1'] != $_POST['fpassword2']) {
                     $errors[] = 'Your two passwords did not match.';
                 } else {
-                    $p = mysqli_real_escape_string($conn, trim($_POST['fpassword1']));
+                    //$p = mysqli_real_escape_string($conn, trim($_POST['fpassword1']));
                 }
             } else {
                 $errors[] = 'You forgot to enter your password.';
