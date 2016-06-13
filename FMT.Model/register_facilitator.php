@@ -24,7 +24,7 @@ and open the template in the editor.
         // This query INSERTs a record in the users table.
 // Has the form been submitted?
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            
+            echo "\nhello\n";
             $errors = array(); // Initialize an error array.
             // Check for a agency name:
 
@@ -32,6 +32,7 @@ and open the template in the editor.
                 $errors[] = 'You forgot to enter your agency name.';
             } else {
                 $n = mysqli_real_escape_string($conn, trim($_POST['fname']));
+                echo $n."\n";
                 
             }
             // Check for a agency email
